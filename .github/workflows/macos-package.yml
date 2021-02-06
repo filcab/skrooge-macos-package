@@ -11,11 +11,11 @@ jobs:
       - name: Download MacPorts
         # fixme: add caching
         run: |
-          curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.6.4-10.15-BigSur.pkg
+          curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.6.4-10.15-Catalina.pkg
 
       - name: Install MacPorts
         run: |
-          sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-BigSur.pkg -target /
+          sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-Catalina.pkg -target /
 
       - name: Install dependencies
         run: |
