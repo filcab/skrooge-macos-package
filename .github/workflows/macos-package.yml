@@ -16,8 +16,13 @@ jobs:
       - name: Install MacPorts
         run: |
           sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-Catalina.pkg -target /
+          echo /opt/local/bin >> $GITHUB_PATH
+          echo /opt/local/sbin >> $GITHUB_PATH
 
       - name: Install dependencies
         run: |
           port version
           sudo port install skrooge
+          echo
+          echo Skrooge port contents
+          port contents skrooge
