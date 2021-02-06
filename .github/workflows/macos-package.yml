@@ -1,0 +1,17 @@
+name: Package macOS application
+
+on: push
+
+jobs:
+  package-macos:
+    name: Package macOS application
+    runs-on: macos-latest
+
+    steps:
+      - name: MacPorts
+        uses: keepitsimpletech/actions/setup-macports@setup-macports/releases/v1
+
+      - name: Install dependencies
+        run: |
+          port version
+          sudo port install skrooge
