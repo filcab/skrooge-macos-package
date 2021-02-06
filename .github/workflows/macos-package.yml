@@ -5,11 +5,17 @@ on: push
 jobs:
   package-macos:
     name: Package macOS application
-    runs-on: macos-10.14
+    runs-on: macos-latest
 
     steps:
-      - name: MacPorts
-        uses: keepitsimpletech/actions/setup-macports@setup-macports/releases/v1
+      - name: Download MacPorts
+        # fixme: add caching
+        run: |
+          curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.6.4-11.0-BigSur.pkg
+
+      - name: Install MacPorts
+        run: |
+          sudo /usr/sbin/installer -pkg MacPorts-2.6.4-11.0-BigSur.pkg -target /
 
       - name: Install dependencies
         run: |
