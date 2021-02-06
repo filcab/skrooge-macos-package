@@ -5,7 +5,7 @@ on: push
 jobs:
   package-macos:
     name: Package macOS application
-    runs-on: macos-latest
+    runs-on: macos-10.14
 
     steps:
       - name: MacPorts
