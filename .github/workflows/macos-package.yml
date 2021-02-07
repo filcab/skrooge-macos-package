@@ -23,6 +23,11 @@ jobs:
           sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-Catalina.pkg -target /
           sudo port selfupdate
 
+      - name: Blindly try to fix libtool Portfile...
+        run: |
+          echo this should not depend on xattr, and it should be available anyway
+          sed -i -e '/depends_build       bin:xattr:xattr/d'
+
       - name: Install skrooge dependencies
         run: |
           port version
