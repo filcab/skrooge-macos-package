@@ -23,9 +23,13 @@ jobs:
           sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-Catalina.pkg -target /
           sudo port selfupdate
 
-      - name: Install skrooge
+      - name: Install skrooge dependencies
         run: |
           port version
+          port install rdepof:skrooge
+          
+      - name: Install skrooge
+      - run: |
           sudo port -d install skrooge || cat /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_macports_release_tarballs_ports_kde_skrooge/skrooge/main.log
           echo
           echo Skrooge port contents
