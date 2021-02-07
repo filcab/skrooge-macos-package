@@ -13,11 +13,14 @@ jobs:
         run: |
           curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.6.4-10.15-Catalina.pkg
 
+      - name: Setup path for subsequent commands
+        run: |
+          echo /opt/local/bin >> $GITHUB_PATH
+          echo /opt/local/sbin >> $GITHUB_PATH
+
       - name: Install MacPorts
         run: |
           sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-Catalina.pkg -target /
-          echo /opt/local/bin >> $GITHUB_PATH
-          echo /opt/local/sbin >> $GITHUB_PATH
           sudo port selfupdate
 
       - name: Install skrooge
@@ -26,4 +29,4 @@ jobs:
           sudo port -d install skrooge || cat /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_macports_release_tarballs_ports_kde_skrooge/skrooge/main.log
           echo
           echo Skrooge port contents
-          port contents skrooge          
+          port contents skrooge
