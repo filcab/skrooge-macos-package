@@ -29,7 +29,7 @@ jobs:
           port install rdepof:skrooge
           
       - name: Install skrooge
-      - run: |
+        run: |
           sudo port -d install skrooge || cat /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_macports_release_tarballs_ports_kde_skrooge/skrooge/main.log
           echo
           echo Skrooge port contents
