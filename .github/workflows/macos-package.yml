@@ -26,8 +26,7 @@ jobs:
       - name: Blindly try to fix libtool Portfile...
         run: |
           echo this should not depend on xattr, and it should be available anyway
-          ls -R /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/devel/libtool
-          sed -i -e '/depends_build       bin:xattr:xattr/d' /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/devel/libtool/Portfile
+          sudo sed -i -e '/depends_build       bin:xattr:xattr/d' /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/devel/libtool/Portfile
 
       - name: Install skrooge dependencies
         run: |
