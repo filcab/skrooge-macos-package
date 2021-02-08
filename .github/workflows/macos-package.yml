@@ -8,34 +8,25 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Download MacPorts
-        # fixme: add caching
+      - name: Add KDE5 homebrew tap
         run: |
-          curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.6.4-10.15-Catalina.pkg
-
-      - name: Setup path for subsequent commands
-        run: |
-          echo /opt/local/bin >> $GITHUB_PATH
-          echo /opt/local/sbin >> $GITHUB_PATH
-
-      - name: Install MacPorts
-        run: |
-          sudo /usr/sbin/installer -pkg MacPorts-2.6.4-10.15-Catalina.pkg -target /
-          sudo port selfupdate
-
-      - name: Blindly try to fix libtool Portfile...
-        run: |
-          echo this should not depend on xattr, and it should be available anyway
-          sudo sed -i -e '/depends_build       bin:xattr:xattr/d' /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/devel/libtool/Portfile
-
+          brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
+          "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
+          
       - name: Install skrooge dependencies
         run: |
-          port version
-          sudo port install rdepof:skrooge
+          "$(brew --repo kde-mac/kde)/tools/install.sh"
+          brew install qca libofx
           
-      - name: Install skrooge
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          repository: https://invent.kde.org/office/skrooge.git
+
+      - name: Build skrooge
         run: |
-          sudo port -d install skrooge || cat /opt/local/var/macports/logs/_opt_local_var_macports_sources_rsync.macports.org_macports_release_tarballs_ports_kde_skrooge/skrooge/main.log
-          echo
-          echo Skrooge port contents
-          port contents skrooge
+          cmake -Bbuild -H. -DCMAKE_INSTALL_PREFIX=$(pwd)/install
+          make -C build getpo
+          make -C build
+          make -C build install
+          
