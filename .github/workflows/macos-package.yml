@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Add KDE5 homebrew tap
         run: |
-          brew list
+          brew list --formula
           brew tap kde-mac/kde https://invent.kde.org/packaging/homebrew-kde.git --force-auto-update
           "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
           
