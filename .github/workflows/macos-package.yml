@@ -16,6 +16,7 @@ jobs:
           
       - name: Install skrooge dependencies
         run: |
+          brew unlink taglib
           "$(brew --repo kde-mac/kde)/tools/install.sh"
           brew install qca libofx
           
