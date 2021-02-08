@@ -15,7 +15,9 @@ jobs:
           "$(brew --repo kde-mac/kde)/tools/do-caveats.sh"
           
       - name: Install skrooge dependencies
+        # taglib screws up the build later. Install it preemptively then unlink it
         run: |
+          brew install taglib
           brew unlink taglib
           "$(brew --repo kde-mac/kde)/tools/install.sh"
           brew install qca libofx
