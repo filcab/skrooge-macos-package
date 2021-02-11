@@ -25,6 +25,9 @@ jobs:
 
       - name: Build skrooge
         run: |
+          export LDFLAGS="-L/usr/local/opt/qt/lib"
+          export CPPFLAGS="-I/usr/local/opt/qt/include"
+          export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
           cmake -Bbuild -Hskrooge -DCMAKE_INSTALL_PREFIX=$(pwd)/install
           make -C build getpo
           make -C build
