@@ -17,8 +17,7 @@ jobs:
       - name: Install skrooge dependencies
         run: |
           brew install boost libofx qca sqlcipher sqlite3
-          brew install --HEAD grantlee
-          brew install qt-webkit
+          brew install --HEAD grantlee qt-webkit
           brew install kf5-kactivities kf5-kcoreaddons kf5-kdeclarative kf5-kdelibs4support kf5-kdewebkit kf5-kiconthemes kf5-kirigami2 kf5-knewstuff kf5-knotifyconfig kf5-kparts kf5-kross kf5-krunner kf5-kwallet kf5-kxmlgui kf5-plasma-framework
           
       - name: Checkout source code
